@@ -17,7 +17,7 @@ function FindProxyForURL(url, host) {
         "*twitter*", "*twimg*", "*x.com*", "*t.co*",
         "*microsoft*", "*live*", "*office*", "*windows*",
         "*amazon*", "*aws*", "*cloudfront*",
-        "*apple*", "*icloud*", "*x*",  // ✅ 修复：添加逗号
+        "*apple*", "*icloud*", "*x*",
         
         // 流媒体
         "*netflix*", "*nflx*", 
@@ -48,11 +48,24 @@ function FindProxyForURL(url, host) {
 
     // ====== 场景3：国内域名直连（精确匹配）===== //
     const cnDomains = [
-        // 精简版：保留核心域名
-        "*.baidu.*", "*.taobao.*", "*.jd.*", "*.qq.com", 
-        "*.weibo.com", "*.zhihu.com", "*.bilibili.com", "*.163.com",
-        "*.gov.cn", "*.edu.cn", "*.cn", "*.alicdn.com", "*.tencent.com",
-        "*.weixin.qq.com", "*.douyin.com", "*.tmall.com"
+        // 搜索引擎
+        "*baidu*", "*sogou*", "*so.com*", "*sm.cn*", 
+        // 电商购物
+        "*taobao*", "*tmall*", "*jd*", "*pinduoduo*", "*suning*", "*dangdang*", "*vip.com*",
+        // 社交媒体
+        "*weibo*", "*zhihu*", "*douban*", "*xiaohongshu*", "*tieba*", "*tianya*",
+        // 视频音乐
+        "*bilibili*", "*iqiyi*", "*youku*", "*tudou*", "*mgtv*", "*qq.com*", "*kuwo*", "*kugou*", "*netase*", "*douyin*",
+        // 生活服务
+        "*dianping*", "*meituan*", "*ele.me*", "*ctrip*", "*qunar*", "*12306*",
+        // 新闻资讯
+        "*people*", "*xinhua*", "*ifeng*", "*sina*", "*sohu*", "*163.com*", "*china.com*",
+        // 政府教育
+        "*.gov.cn", "*.edu.cn", "*.org.cn", "*.ac.cn", "*xuexi.cn*",
+        // 金融支付
+        "*alipay*", "*unionpay*", "*cmbchina*", "*icbc*", "*abc*", "*boc*", "*ccb*",
+        // 其他常用
+        "*weather*", "*mi*", "*huawei*", "*oppo*", "*vivo*", "*xiaomi*", "*tencent*", "*.cn*", "*alicdn*", "*tencent*", "*apple*"
     ];
     
     // ✅ 移除 .cn 强制直连规则（避免误判）
