@@ -9,7 +9,34 @@ function FindProxyForURL(url, host) {
         return "DIRECT";
     }
 
-    // ====== 场景2：国外域名优先代理 ====== //
+    // ====== 场景2：国内域名直连（精确匹配）===== //
+    const cnDomains = [
+        // 搜索引擎
+        "*baidu*", "*sogou*", "*so.com*", "*sm.cn*", 
+        // 电商购物
+        "*taobao*", "*tmall*", "*jd*", "*pinduoduo*", "*suning*", "*dangdang*", "*vip.com*",
+        // 社交媒体
+        "*weibo*", "*zhihu*", "*douban*", "*xiaohongshu*", "*tieba*", "*tianya*",
+        // 视频音乐
+        "*bilibili*", "*iqiyi*", "*youku*", "*tudou*", "*mgtv*", "*qq.com*", "*kuwo*", "*kugou*", "*netase*", "*douyin*", "*163*",
+        // 生活服务
+        "*dianping*", "*meituan*", "*ele.me*", "*ctrip*", "*qunar*", "*12306*",
+        // 新闻资讯
+        "*people*", "*xinhua*", "*ifeng*", "*sina*", "*sohu*", "*163.com*", "*china.com*",
+        // 政府教育
+        "*.gov.cn", "*.edu.cn", "*.org.cn", "*.ac.cn", "*xuexi.cn*",
+        // 金融支付
+        "*alipay*", "*unionpay*", "*cmbchina*", "*icbc*", "*abc*", "*boc*", "*ccb*",
+        // 其他常用
+        "*weather*", "*mi*", "*huawei*", "*oppo*", "*vivo*", "*xiaomi*", "*tencent*", "*.cn*", "*alicdn*", "*tencent*", "*apple*"
+    ];
+    
+    // ✅ 移除 .cn 强制直连规则（避免误判）
+    for (let domain of cnDomains) {
+        if (shExpMatch(host, domain)) return "DIRECT";
+    }
+
+    // ====== 场景3：国外域名代理 ====== //
     const foreignDomains = [
         // 国际巨头
         "*google*", "*youtube*", "*gstatic*", "*googleapis*", 
@@ -46,32 +73,7 @@ function FindProxyForURL(url, host) {
         }
     }
 
-    // ====== 场景3：国内域名直连（精确匹配）===== //
-    const cnDomains = [
-        // 搜索引擎
-        "*baidu*", "*sogou*", "*so.com*", "*sm.cn*", 
-        // 电商购物
-        "*taobao*", "*tmall*", "*jd*", "*pinduoduo*", "*suning*", "*dangdang*", "*vip.com*",
-        // 社交媒体
-        "*weibo*", "*zhihu*", "*douban*", "*xiaohongshu*", "*tieba*", "*tianya*",
-        // 视频音乐
-        "*bilibili*", "*iqiyi*", "*youku*", "*tudou*", "*mgtv*", "*qq.com*", "*kuwo*", "*kugou*", "*netase*", "*douyin*",
-        // 生活服务
-        "*dianping*", "*meituan*", "*ele.me*", "*ctrip*", "*qunar*", "*12306*",
-        // 新闻资讯
-        "*people*", "*xinhua*", "*ifeng*", "*sina*", "*sohu*", "*163.com*", "*china.com*",
-        // 政府教育
-        "*.gov.cn", "*.edu.cn", "*.org.cn", "*.ac.cn", "*xuexi.cn*",
-        // 金融支付
-        "*alipay*", "*unionpay*", "*cmbchina*", "*icbc*", "*abc*", "*boc*", "*ccb*",
-        // 其他常用
-        "*weather*", "*mi*", "*huawei*", "*oppo*", "*vivo*", "*xiaomi*", "*tencent*", "*.cn*", "*alicdn*", "*tencent*", "*apple*"
-    ];
     
-    // ✅ 移除 .cn 强制直连规则（避免误判）
-    for (let domain of cnDomains) {
-        if (shExpMatch(host, domain)) return "DIRECT";
-    }
 
     // ====== 场景4：智能后备规则 ====== //
     const globalTlds = [".com", ".org", ".net", ".io", ".ai", ".app", ".dev", ".xyz"];
