@@ -18,7 +18,7 @@ function FindProxyForURL(url, host) {
         // 社交媒体
         "*weibo*", "*zhihu*", "*douban*", "*xiaohongshu*", "*tieba*", "*tianya*",
         // 视频音乐
-        "*bilibili*", "*iqiyi*", "*youku*", "*tudou*", "*mgtv*", "*qq.com*", "*kuwo*", "*kugou*", "*netase*", "*douyin*", "*163*",
+        "*bilibili*", "*iqiyi*", "*youku*", "*tudou*", "*mgtv*", "*qq.com*", "*kuwo*", "*kugou*", "*netase*", "*douyin*", "*163*", "*kuaishou*",
         // 生活服务
         "*dianping*", "*meituan*", "*ele.me*", "*ctrip*", "*qunar*", "*12306*",
         // 新闻资讯
